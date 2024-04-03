@@ -1,0 +1,15 @@
+SELECT * from Album a ;
+select COUNT(*) as Records from Album a ;
+
+SELECT COUNT(*) from Album a WHERE Column1 is not NULL; 
+SELECT Albumid, Title from Album a WHERE Column1 is null;
+
+
+--  CARACTERIZANDO OS REGISTROS DOS ARTISTAS  --
+select * FROM Artist a;
+
+SELECT a2.ArtistId, a2.Name, COUNT(*) AS Records from Album a inner join Artist a2 group by 1; 
+SELECT  a2.ArtistId, a2.Name, COUNT(*) as Records from Album a inner join Artist a2 group by 1 ORDER by Records LIMIT 3; 
+
+
+
