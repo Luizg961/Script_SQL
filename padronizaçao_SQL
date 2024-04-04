@@ -1,0 +1,21 @@
+  -- PADRONIZAÇAO SQL
+   
+   select Fname,
+       case
+           when Sex = 'M'  then 'Masculino'       
+           when Sex = 'F'  then 'FEMININO'
+           else Sex
+           end as Gender
+        from employee e;
+           
+           
+           
+           
+           select Fname,Sex,
+       case
+           when Sex = 'm'  then 'M'       
+           when Sex = 'f'  then 'F'
+           else Sex
+        end as Gender
+        from employee e;
+           
