@@ -1,0 +1,48 @@
+use  company_constraints;
+show tables;
+
+select * from employee e;
+select * from departament d;
+
+select Dno, Ssn from employee e inner join departament d om Dno = Dnumber;
+
+-- categorizar os dapartamentos por numeros de colaboradores --
+
+select Dno , count(*) as Total from employee e
+inner join departament d on Dno = Dnumber 
+group by 1 order by Total asc;
+
+-- projetos por departamentos --
+
+select Pname, Dnum from Project p inner join departament d Dnum = Dnumber;
+
+select Dnum , count(*) as Projects from project p
+inner join departament d on Dnum = Dnumber
+group by 1 order by Projects asc;
+
+
+
+-- DISCRETIZAÇAO 
+select Fname,
+    case
+    	when Salary > 39000 then 'EXECUTIVO'
+    	when Salary > 29000 then 'SENIOR'
+    	when Salary > 19000 then 'PLENOR'
+    	else 'NA'
+    end as Employee_level
+    from employee e
+    order by Employee_level;
+   
+   
+   -- EXEMPLOS NPS
+   
+   /*
+   select response_id,
+       case
+       	when nps <= 6 then 'DETRATOR'
+       	when nps <= 8 then 'PASSIVO'
+       end as NPS
+       from table_name e
+       order by NPS
+       */
+       
