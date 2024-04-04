@@ -1,0 +1,37 @@
+select * from Customer c;
+select * from Customer c limit 10;
+select count(*) from Customer c2;
+select FirstName,Address from Customer c;
+
+-- quantos clientes moram na broadway --
+SELECT  count(*) from Customer c where Address like 'Av. Paulista, 2022' ;
+SELECT  count(*) from Customer c where Address like '%Broadway';
+
+-- verificar company dos clientes --
+--contando quantos preencheram o company
+select count(*) from Customer c where Company is not null ;
+--contando quantos nao preencheram o company
+select FirstName from Customer c where Company is null;
+
+
+-- quais dos clientes sao colaboradores
+select * from Employee;
+
+select c.FirstName, c.LastName from Customer c 
+where Company is null and c.FirstName in (select e.FirstName from Employee e);
+
+select c.FirstName, c.LastName from Customer c inner join Employee e  where c.FirstName = e.FirstName;
+
+
+-- clientes que possuem invoice associados e a quantidades para cada cliente
+
+select * from invoice i limit 10;
+select * from invoiceLine il order by UnitPrice desc limit 10;
+
+select c.CustomerId, c.FirstName, COUNT(*) as Record from Invoice i
+Inner join Customer c on c.CustomerId = i.CustomerId
+group by 1 order by Record;
+
+select i.InvoiceId , il.InvoiceLineId from Invoice i
+inner join InvoiceLine il inner join Customer c on c.CustomerId = i.CustomerId 
+group by 1 limit 100;  
