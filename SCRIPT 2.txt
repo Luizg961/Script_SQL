@@ -1,0 +1,102 @@
+create database dados;
+use dados;
+
+create table funcionario(
+id_fun int primary key,
+nome varchar(20),
+sobrenone varchar(20),
+idade int,
+id_depar int,
+
+foreign key (id_depar) references departamento(id_depar)
+);
+
+INSERT INTO funcionario (id_fun, nome, sobrenone, idade, id_depar) VALUES
+    (1, 'Luiz', 'Gustavo', 24, 1),(2, 'Gabriel', 'Silva', 26, 5),(3, 'Felipe', 'Oliveira', 50, 3),(4, 'Mariana', 'Souza', 30, 2),(5, 'Carlos', 'Ferreira', 45, 4),
+    (6, 'Ana', 'Costa', 29, 1),(7, 'Bruno', 'Martins', 33, 5),(8, 'Julia', 'Rocha', 27, 3),(9, 'Fernando', 'Almeida', 40, 2),(10, 'Camila', 'Mendes', 31, 4),
+    (11, 'Ricardo', 'Barros', 36, 1),(12, 'Larissa', 'Pereira', 28, 3),(13, 'Gustavo', 'Lima', 39, 5),(14, 'Patricia', 'Ribeiro', 32, 2),(15, 'Eduardo', 'Santana', 47, 4),(16, 'Amanda', 'Teixeira', 25, 1),
+    (17, 'Vinicius', 'Correia', 37, 3),(18, 'Tatiane', 'Gomes', 26, 5),(19, 'Rodrigo', 'Azevedo', 41, 2),(20, 'Beatriz', 'Monteiro', 34, 4),(21, 'Thiago', 'Duarte', 29, 1),(22, 'Vanessa', 'Carvalho', 35, 3),
+    (23, 'Rafael', 'Moreira', 38, 5),(24, 'Isabela', 'Nunes', 27, 2),(25, 'Fábio', 'Rezende', 48, 4),(26, 'Débora', 'Moraes', 31, 1),(27, 'Leandro', 'Batista', 42, 3),(28, 'Aline', 'Lopes', 33, 5),
+    (29, 'Matheus', 'Cavalcante', 30, 2),(30, 'Carla', 'Freitas', 44, 4),(31, 'Diego', 'Neves', 25, 1),(32, 'Natália', 'Santos', 39, 3),(33, 'Leonardo', 'Torres', 36, 5),(34, 'Jessica', 'Vieira', 28, 2),
+    (35, 'Alex', 'Ramos', 43, 4),(36, 'Priscila', 'Ferraz', 30, 1),(37, 'Henrique', 'Souza', 46, 3),(38, 'Tatiana', 'Rocha', 27, 5),(39, 'Bruna', 'Alves', 35, 2),(40, 'José', 'Machado', 50, 4),
+    (41, 'Sandra', 'Farias', 32, 1),(42, 'Daniel', 'Pinheiro', 37, 3),(43, 'Luciana', 'Barbosa', 29, 5),(44, 'Elias', 'Campos', 41, 2),(45, 'Renata', 'Assis', 33, 4),(46, 'César', 'Gonçalves', 26, 1),
+    (47, 'Juliana', 'Cardoso', 38, 3),(48, 'Pedro', 'Pinto', 30, 5),(49, 'Roberta', 'Miranda', 45, 2),(50, 'Sérgio', 'Nascimento', 48, 4);
+    
+
+drop table funcionario;
+drop table departamento;
+
+create table departamento(
+id_depar int primary key auto_increment,
+cargo varchar(20)
+
+);
+
+insert into departamento(id_depar,cargo) values (1,'professor'),(2,'contador'),(3,'analista'),(4,'jogador'),(5,'vendedor');
+    
+create table unidade(
+id_unidade int primary key,
+nome_uni varchar(20)
+
+);
+
+insert into unidade(id_unidade,nome_uni) values (1,'loja A'),(2,'loja B'),(3,'loja C'),(4,'loja D');
+
+alter table funcionario
+add id_unidade int;
+
+alter table funcionario
+add constraint FK_funcionariounidade
+foreign key (id_unidade) references unidade(id_unidade); 
+
+
+-- PESQUISA ENTRA AS TABELAS 
+select * from funcionario;
+select * from unidade;
+select * from departamento;
+select * from funcionario where id_fun = '2';
+select * from funcionario where nome = 'felipe';
+select * from funcionario where idade = '24';
+select idade from funcionario where idade > 25;
+-- ORDENAR ASC 
+select * from funcionario order by nome asc;
+select * from funcionario order by idade asc;
+-- POSSUEM A TABELA PREENCHIDA 
+select * from funcionario where idade is not null;
+-- NAO CONTEM TODOS OS VALORES
+select * from funcionario where idade is null;
+
+
+-- OPERADORES RELACIONAIS DE COMPARAÇAO
+select * from funcionario where idade <30;
+select * from funcionario where idade >= 30;
+select *from funcionario where idade = 30;
+select *from funcionario where idade <> 50;
+
+
+-- OPRADORES LOGICOS
+-- AND
+select * from funcionario where idade = 30 and id_depar <= 10;
+-- OR
+-- select * from funcionario where tipo _pag = 'DEBITO' or tipo_pag ='CREDITO'
+-- NOT
+select * from funcionario where not idade = 1; 
+
+-- FUNÇOES NUMERICA E TEXTO 
+select *from funcionario;
+-- media
+select AVG(idade) from funcionario;
+select max(idade) from funcionario;
+select min(idade) from funcionario;
+select sum(idade) from funcionario;
+
+-- FUNÇAO NUMERICAS ROUND
+
+-- AREDONDAR NUMEROS FLOOT
+-- select nome_prod, round(valor_total) from vendas
+
+select UCASE(nome) from funcionario;
+
+
+select *from funcionario;
+select replace(nome,'Mariana', 'TENIS' ) from funcionario;

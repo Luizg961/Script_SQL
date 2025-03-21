@@ -1,0 +1,70 @@
+create database dados;
+use dados;
+
+create table funcionario(
+id_fun int primary key,
+nome varchar(20),
+sobrenone varchar(20),
+idade int,
+id_depar int,
+
+foreign key (id_depar) references departamento(id_depar)
+);
+
+INSERT INTO funcionario (id_fun, nome, sobrenone, idade, id_depar) 
+VALUES 
+    (1, 'Luiz', 'Gustavo', 24, 1),
+    (2, 'Gabriel', 'Gustavo', 26, 5),
+    (3, 'Felipe', 'Gustavo', 50, 3);
+    
+
+drop table funcionario;
+drop table departamento;
+
+create table departamento(
+id_depar int primary key auto_increment,
+cargo varchar(20)
+
+);
+
+insert into departamento(id_depar,cargo) values (1,'professor'),(2,'contador'),(3,'analista'),(4,'jogador'),(5,'vendedor');
+    
+create table unidade(
+id_unidade int primary key,
+nome_uni varchar(20)
+
+);
+
+insert into unidade(id_unidade,nome_uni) values (1,'loja A'),(2,'loja B'),(3,'loja C'),(4,'loja D');
+
+alter table funcionario
+add id_unidade int;
+
+alter table funcionario
+add constraint FK_funcionariounidade
+foreign key (id_unidade) references unidade(id_unidade); 
+
+
+
+select * from funcionario where id_fun = '2';
+select * from funcionario where nome = 'felipe';
+select * from funcionario where idade = '24';
+
+
+
+select * from funcionario order by nome asc;
+select * from funcionario order by idade asc;
+select * from funcionario where idade is not null;
+
+
+
+select * from unidade;
+select * from departamento;
+
+
+
+
+
+
+
+
